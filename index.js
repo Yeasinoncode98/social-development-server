@@ -74,7 +74,7 @@ async function getCollections() {
   }
 }
 
-// ---------------------- Routes ----------------------
+// ---------------------- Routes Starts from here ----------------------
 
 // ✅ Root Route - API Info
 app.get("/", (req, res) => {
