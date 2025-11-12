@@ -41,7 +41,7 @@ const verifyFirebaseToken = async (req, res, next) => {
   }
 };
 
-// MongoDB connection with connection pooling
+// MongoDB connection with connection pooling mongodb pass and id safed here by .env
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pkimykw.mongodb.net/?appName=Cluster0`;
 
 let client;
