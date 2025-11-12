@@ -5,11 +5,8 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const admin = require("firebase-admin");
 require("dotenv").config();
 
-// const decoded = Buffer.from(
-//   process.env.FIREBASE_SERVICE_KEY_OKAY,
-//   "base64"
-// ).toString("utf8");
-// const serviceAccount = JSON.parse(decoded);
+// Encode is making issue i tried a lot took help from internet but still it was giving me error
+// Thats why i keep it as it is
 
 const serviceAccount = require("./social_development_key.json");
 
