@@ -1,5 +1,4 @@
 # social-development-server
-## Social Development Events Server
 Backend server for the Social Development Events platform.
 Built with Node.js, Express, MongoDB, Firebase Authentication, and various modern npm packages. This server powers event management, user registration, and social development activities.
 
