@@ -1,4 +1,4 @@
-// ................................3..................
+// Working code best one 1111111111111111111111
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -103,15 +103,15 @@ app.get("/", (req, res) => {
   });
 });
 
-// ✅ Health Check Route Used to chck the routes are okay or not
 app.get("/api/health", async (req, res) => {
   try {
     await clientPromise;
-    const isConnected = client.topology && client.topology.isConnected();
+    // Simple ping to check connection
+    await client.db().admin().ping();
     res.json({
       status: "ok",
       timestamp: new Date().toISOString(),
-      mongodb: isConnected ? "connected" : "disconnected",
+      mongodb: "connected",
     });
   } catch (error) {
     res.status(500).json({
@@ -123,7 +123,7 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-// ✅ Get upcoming events with search & filter
+// ✅ Get upcoming events with search & filter (SORTED BY DATE)
 app.get("/api/events/upcoming", async (req, res) => {
   try {
     const { eventsCollection } = await getCollections();
@@ -147,7 +147,12 @@ app.get("/api/events/upcoming", async (req, res) => {
       filter.type = { $regex: typePattern, $options: "i" };
     }
 
-    const events = await eventsCollection.find(filter).toArray();
+    // ✅ ADDED: Sort by date in ascending order (earliest first)
+    const events = await eventsCollection
+      .find(filter)
+      .sort({ date: 1 }) // 1 = ascending order
+      .toArray();
+
     res.json(events);
   } catch (err) {
     console.error("Error fetching events:", err);
