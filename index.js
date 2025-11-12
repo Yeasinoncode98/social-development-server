@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Initialize Firebase Admin SDK
+// Initialize Firebase Admin SDK command used (firebase admin)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
