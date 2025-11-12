@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const serviceAccount = require("./social_development_key.json");
 
-// Added Middleware here cors installed
+// Middleware used cors only and express json but its not middleware
 
 const app = express();
 const port = process.env.PORT || 3000;
