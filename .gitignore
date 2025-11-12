@@ -1,0 +1,5 @@
+node_modules
+.env
+social_development_key.json
+.vercel
+local.json
