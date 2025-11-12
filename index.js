@@ -103,7 +103,7 @@ app.get("/", (req, res) => {
   });
 });
 
-// ✅ Health Check Route
+// ✅ Health Check Route Used to chck the routes are okay or not
 app.get("/api/health", async (req, res) => {
   try {
     await clientPromise;
