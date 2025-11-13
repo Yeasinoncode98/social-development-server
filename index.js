@@ -76,7 +76,7 @@ async function getCollections() {
 
 // ---------------------- Routes Starts from here ----------------------
 
-// ✅ Root Route - API Info
+//  Root Route - API Info for chcking in vercel
 app.get("/", (req, res) => {
   res.json({
     message: "Social Development API",
@@ -123,7 +123,7 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-// ✅ Get upcoming events with search & filter (SORTED BY DATE)
+//  Get upcoming events with search & filter (SORTED BY DATE)
 app.get("/api/events/upcoming", async (req, res) => {
   try {
     const { eventsCollection } = await getCollections();
@@ -147,7 +147,7 @@ app.get("/api/events/upcoming", async (req, res) => {
       filter.type = { $regex: typePattern, $options: "i" };
     }
 
-    // ✅ ADDED: Sort by date in ascending order (earliest first)
+    //  ADDED: Sort by date in ascending order (earliest first)
     const events = await eventsCollection
       .find(filter)
       .sort({ date: 1 }) // 1 = ascending order
@@ -174,7 +174,7 @@ app.get("/api/events/:id", async (req, res) => {
   }
 });
 
-// ✅ Protected: Get events created by a specific user
+//  Protected: Get events created by a specific user
 app.get("/api/events/user/:email", verifyFirebaseToken, async (req, res) => {
   const emailParam = req.params.email;
   const tokenEmail = req.token_email;
@@ -192,7 +192,7 @@ app.get("/api/events/user/:email", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Get joined events (only self)
+//  Protected: Get joined events (only self)
 app.get("/api/events/joined/:email", verifyFirebaseToken, async (req, res) => {
   const emailParam = req.params.email;
   const tokenEmail = req.token_email;
@@ -210,7 +210,7 @@ app.get("/api/events/joined/:email", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Create event
+//  Protected: Create event
 app.post("/api/events", verifyFirebaseToken, async (req, res) => {
   try {
     const { eventsCollection } = await getCollections();
@@ -225,7 +225,7 @@ app.post("/api/events", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Join event
+//  Protected: Join event
 app.post("/api/events/:id/join", verifyFirebaseToken, async (req, res) => {
   try {
     const { eventsCollection, registrationsCollection } =
@@ -291,7 +291,7 @@ app.post("/api/events/:id/join", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Get user registrations
+//  Protected: Get user registrations
 app.get(
   "/api/registrations/user/:email",
   verifyFirebaseToken,
@@ -314,7 +314,7 @@ app.get(
   }
 );
 
-// ✅ Protected: Update event (only owner)
+//  Protected: Update event (only owner)
 app.put("/api/events/:id", verifyFirebaseToken, async (req, res) => {
   try {
     const { eventsCollection } = await getCollections();
@@ -348,7 +348,7 @@ app.put("/api/events/:id", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Delete event (only owner)
+//  Protected: Delete event (only owner)
 app.delete("/api/events/:id", verifyFirebaseToken, async (req, res) => {
   try {
     const { eventsCollection, registrationsCollection } =
@@ -379,7 +379,7 @@ app.delete("/api/events/:id", verifyFirebaseToken, async (req, res) => {
   }
 });
 
-// ✅ Protected: Cleanup null joinedUsers
+//  Protected: Cleanup null joinedUsers
 app.post(
   "/api/migrate/cleanup-null-users",
   verifyFirebaseToken,
@@ -400,7 +400,6 @@ app.post(
   }
 );
 
-// Only run server locally, not on Vercel
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log(`🚀 Server running on http://localhost:${port}`);
